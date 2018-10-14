@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min1.js"></script>
+    <script type="text/javascript" src="../../static/news/js/user_follow.js"></script>
+</head>
+<body class="inframe_body">
+        <h3 class="common_title">我的关注</h3>
+        <ul class="card_list_con">
+            {% for follower in data.followers_list %}
+            <li class="author_card card_list">
+                <a href="#" target="_blank" class="author_pic"><img src="{{ follower.avatar_url }}" alt="author_pic"></a>
+                <a href="#" target="_blank" class="author_name">{{ follower.nick_name }}</a>
+                <div class="author_resume">{{ follower.signature }}</div>
+                <div class="writings"><span>总篇数</span><b>{{ follower.news_count}}</b></div>
+                <div class="follows"><span>粉丝</span><b>{{ follower.followed_count }}</b></div>
+                <a href="javascript:;" class="focus fr" {% if follower.is_followed %}style="display: none" {% endif %} user_id="{{ follower.id }}">关注</a>
+                <a href="javascript:;" class="focused fr"  {% if not follower.is_followed %}style="display: none" {% endif %} user_id="{{ follower.id }}"><span class="out">已关注</span><span class="over">取消关注</span></a>
+            </li>
+            {% endfor %}
+
+        </ul>
+        
+        
+        <div id="pagination" class="page"></div>
+        <script>
+            $(function() {
+                $("#pagination").pagination({
+                    currentPage: {{ data.current_page }},
+                    totalPage: {{ data.totalpages }},
+                    callback: function(current) {
+                        var page = $(".active").attr('data-current')
+                        $('.active').attr('href', "/user/user_follow?page="+page)
+                    }
+                });
+            });
+        </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+
+
+1  添加/取消收藏
+URL：/news_collect
+请求方式：POST
+传入参数：JSON格式
+参数
+参数名	类型	      是否必须	    参数说明
+news_id	int	        是	        新闻id
+action	string	    是	        指定两个值：'collect', 'cancel_collect'
+
+返回类型：JSON
+参数名	类型	      是否必须	    参数说明
+errno	int	        是	        错误码
+errmsg	string	    是	        错误信息
+
+
+2 关注/取消关注
+
+URL：/followed_user
+请求方式：POST
+传入参数：JSON格式
+参数
+参数名	类型	        是否必须	        参数说明
+user_id	int	        是	            被关注的用户id
+action	string	    是	            指定两个值：'follow', 'unfollow'
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+3 获取注册窗口图片验证码
+url: /passport/image_code
+请求方式：GET
+传入参数：url参数格式
+
+参数
+参数名       类型        是否必须        参数说明
+code_id     string      是            生成图片验证码的编号
+
+返回类型： image/jpg
+
+4 获取手机验证码
+url: /passport/smscode
+请求方式： POST
+传入参数
+参数名	            类型	        是否必须	        参数说明
+mobile	            string	        是	            注册手机号码
+image_code	        string      是	            图片验证码内容
+image_code_id	    string	    是	            图片验证码编号
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+5 注册提交接口
+url：/passport/register
+请求方式： POST
+传入参数
+参数名	            类型	        是否必须	        参数说明
+mobile	            string	      是	            注册手机号码
+smscode	            string        是	            手机验证码内容
+password	        string	      是	            注册账号密码
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+6 登陆接口
+url：/passport/login
+请求方式： POST
+传入参数
+参数名	            类型	        是否必须	        参数说明
+mobile	            string	      是	            注册手机号码
+password	        string	      是	            注册账号密码
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+7 退出登陆
+url： /passport/logout
+请求方式： GET
+
+请求参数 ： 无
+
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+8 首页
+url： /
+请求方式： GET
+
+请求参数 ： 无
+
+返回类型：html/text
+
+9 首页新闻列表动态加载
+url：/update_news
+请求方式: POST
+
+传入参数
+参数名	            类型	        是否必须	        参数说明
+page	            string	      是	            查询新闻页码
+ccid	            string	      是	            新闻分类
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+data    json        是              返回新闻列表
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+10 新闻详情
+url: /passport/detail
+请求方式： POST
+传入参数
+参数名	            类型	        是否必须	        参数说明
+news_id	            string	      是	            查询新闻详情
+返回类型：JSON
+参数名	类型	        是否必须	        参数说明
+data    json        是              返回新闻详情
+errno	int	        是	            错误码
+errmsg	string	    是	            错误信息
+
+
+提交项目代码

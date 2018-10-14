@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+    <div class="news_list">
+        <h3>新闻列表</h3>
+        <ul class="article_list">
+
+            {% for new in data.news_list %}
+              <li><a href="/detail?id={{ new.id }}">{{ new.title }}</a>
+                  {% if new.status == 0 %}
+                      <em class="pass">已通过</em><span>{{ new.create_time }}</span>
+                  {%  elif new.status == 1 %}
+                      <em class="review">审核中</em><span>{{ new.create_time }}</span>
+                  {%  elif new.status == -1 %}
+                      <em class="nopass">未通过</em><span>{{ new.create_time }}</span><b>未通过原因：{{ new.reason }}</b>
+                  {% endif %}
+              </li>
+            {% endfor %}
+
+        </ul>
+        <div id="pagination" class="page"></div>
+        <script>
+            // 调用父页面的方法改变菜单指示
+            // window.parent.fnChangeMenu(2);
+
+            $(function(){
+                $("#pagination").pagination({
+                    currentPage: {{ data.current_page }},
+                    totalPage: {{ data.pages }},
+                    callback: function(current) {
+                        window.location.href = "/user/user_news_list?page=" + current
+                    }
+                });
+            });
+        </script>
+       
+    </div>
+</body>
+</html>
